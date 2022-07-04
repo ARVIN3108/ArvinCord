@@ -1,0 +1,3 @@
+[submodule "FlameCord"]
+	path = FlameCord
+	url = https://github.com/2lstudios-mc/FlameCord

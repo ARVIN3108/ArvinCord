@@ -1,0 +1,25 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>id.arvin3108.arvincord</groupId>
+    <artifactId>arvincord-super</artifactId>
+    <version>dev-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>ArvinCord-Super</name>
+    <description>Super project for ArvinCord.</description>
+    <url>https://github.com/ARVIN3108/ArvinCord</url>
+
+    <modules>
+        <module>ArvinCord-Proxy</module>
+    </modules>
+
+    <build>
+        <defaultGoal>clean install</defaultGoal>
+    </build>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+</project>
