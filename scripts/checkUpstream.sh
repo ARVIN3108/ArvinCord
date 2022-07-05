@@ -15,7 +15,7 @@ if [ ! -z "$flamecord" ]; then
     logsuffix="$logsuffix\n\nFlameCord Changes:\n$flamecord"
     if [ -z "$updated" ]; then updated="FlameCord"; else updated="$updated/FlameCord"; fi
 fi
-disclaimer="Upstream has released updates that appear to apply and compile correctly.\nThis update has not been tested by 2LStudios and as with ANY update, please do your own testing"
+disclaimer="Upstream has released updates that appear to apply and compile correctly.\nThis update has not been tested by ARVIN3108 ID and as with ANY update, please do your own testing"
 
 if [ ! -z "$1" ]; then
     disclaimer="$@"

@@ -27,7 +27,7 @@ index 00000000..d10702e6
 +    <packaging>jar</packaging>
 +
 +    <name>Waterfall-ArvinCord</name>
-+    <description>ArvinCord adds essential features like commands, whitelist and more</description>
++    <description>ArvinCord adds essential features such as commands, whitelist system, etc</description>
 +</project>
 diff --git a/pom.xml b/pom.xml
 index d940b21c..a504ae9f 100644

@@ -7,10 +7,11 @@ function update {
     cd "$basedir/$1"
     git fetch && git reset --hard origin/master
     cd "$basedir/$1/.."
-    git add $1
+    git add $(basename $basedir/$1)
 }
 
 update FlameCord
+update Flamecord/Waterfall
 
 # Update submodules
 git submodule update --recursive

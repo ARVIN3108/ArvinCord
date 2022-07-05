@@ -16,9 +16,6 @@ case "$1" in
     "e" | "edit")
         scripts/edit.sh
     ;;
-    "w" | "wiggle")
-        scripts/wigglePatch.py
-    ;;
     *)
         echo "ArvinCord build tool command. This provides a variety of commands to control the ArvinCord"
         echo "build. View below for details of the available commands."
@@ -30,6 +27,5 @@ case "$1" in
         echo "  * b, build         | Builds the project"
         echo "                     | The bootstrap artifact can be found in ArvinCord-Proxy/bootstrap/target/"
         echo "  * e, edit          | Runs git rebase -i for Waterfall, allowing patches to be easily modified"
-        echo "  * w, wiggle        | Helps to apply patches that fail to using default Git."
     ;;
 esac
