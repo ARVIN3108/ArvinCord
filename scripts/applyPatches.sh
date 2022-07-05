@@ -19,6 +19,11 @@ function applyPatch {
     what_name=$(basename "$what")
     target=$2
     branch=$3
+	patchdir="${what_name}-Patches"
+	
+	if [ "$4" != "" ]; then
+		patchdir=$4
+	fi
 
     cd "$basedir/$what"
     git fetch
@@ -40,7 +45,7 @@ function applyPatch {
     echo "  Applying patches to $target..."
 
     git am --abort >/dev/null 2>&1
-    git am --3way --ignore-whitespace "$basedir/${what_name}-Patches/"*.patch
+    git am --3way --ignore-whitespace "$basedir/$patchdir/"*.patch
     if [ "$?" != "0" ]; then
         echo "  Something did not apply cleanly to $target."
         echo "  Please review above details and finish the apply then"
@@ -62,15 +67,14 @@ fi
 
 # Apply waterfall patches
 basedir=$basedir/FlameCord/Waterfall
-pushd FlameCord/Waterfall
 applyPatch BungeeCord Waterfall-Proxy HEAD
-popd
 basedir=$(dirname "$basedir")
 
 # Apply flamecord patches
 applyPatch Waterfall/Waterfall-Proxy FlameCord-Proxy HEAD
+basedir=$(dirname "$basedir")
 
 # Apply arvincord patches
-applyPatch FlameCord-Proxy ../ArvinCord-Proxy HEAD
+applyPatch FlameCord/FlameCord-Proxy ArvinCord-Proxy HEAD patches
 
 enableCommitSigningIfNeeded

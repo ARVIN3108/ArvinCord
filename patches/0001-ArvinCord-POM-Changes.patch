@@ -1,0 +1,66 @@
+From f8478d5ec62566d6ff52f7b3d5eceece7b64a692 Mon Sep 17 00:00:00 2001
+From: ARVIN3108 <31arvin08@gmail.com>
+Date: Tue, 5 Jul 2022 08:12:27 +0700
+Subject: [PATCH] ArvinCord POM Changes
+
+
+diff --git a/arvincord/pom.xml b/arvincord/pom.xml
+new file mode 100644
+index 00000000..d10702e6
+--- /dev/null
++++ b/arvincord/pom.xml
+@@ -0,0 +1,19 @@
++<project xmlns="http://maven.apache.org/POM/4.0.0"
++         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
++    <modelVersion>4.0.0</modelVersion>
++
++    <parent>
++        <groupId>io.github.waterfallmc</groupId>
++        <artifactId>waterfall-parent</artifactId>
++        <version>1.19-R0.1-SNAPSHOT</version>
++        <relativePath>../pom.xml</relativePath>
++    </parent>
++
++    <groupId>id.arvin3108</groupId>
++    <artifactId>waterfall-arvincord</artifactId>
++    <version>1.19-R0.1-SNAPSHOT</version>
++    <packaging>jar</packaging>
++
++    <name>Waterfall-ArvinCord</name>
++    <description>ArvinCord adds essential features like commands, whitelist and more</description>
++</project>
+diff --git a/pom.xml b/pom.xml
+index d940b21c..a504ae9f 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -64,6 +64,7 @@
+         <!--<module>slf4j</module>-->
+         <module>native</module>
+         <module>flamecord</module> <!-- FlameCord - POM Changes -->
++        <module>arvincord</module> <!-- ArvinCord - POM Changes -->
+     </modules>
+ 
+     <scm>
+diff --git a/proxy/pom.xml b/proxy/pom.xml
+index 8d7a612e..441cb75b 100644
+--- a/proxy/pom.xml
++++ b/proxy/pom.xml
+@@ -195,6 +195,15 @@
+             <scope>compile</scope>
+         </dependency>
+         <!-- FlameCord end -->
++
++        <!-- ArvinCord start -->
++        <dependency>
++            <groupId>id.arvin3108</groupId>
++            <artifactId>waterfall-arvincord</artifactId>
++            <version>${project.version}</version>
++            <scope>compile</scope>
++        </dependency>
++        <!-- ArvinCord end-->
+     </dependencies>
+ 
+     <!-- Waterfall start - copy license files into jar -->
+-- 
+2.36.1.windows.1
+
