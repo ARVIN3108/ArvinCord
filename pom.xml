@@ -2,14 +2,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>id.arvin3108</groupId>
+    <groupId>io.github.waterfallmc</groupId>
     <artifactId>waterfall-super</artifactId>
     <version>dev-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>io.github.waterfallmc</name>
+    <name>Waterfall-Super</name>
     <description>Super project for ArvinCord.</description>
-    <url>https://github.com/ARVIN3108/ArvinCord</url>
+    <url>https://github.com/2lstudios-mc/FlameCord</url>
 
     <modules>
         <module>ArvinCord-Proxy</module>
