@@ -1,0 +1,118 @@
+From 897633d9e74764cbe7e8b5d407b6fd4e96a7fce4 Mon Sep 17 00:00:00 2001
+From: ARVIN3108 <31arvin08@gmail.com>
+Date: Wed, 6 Jul 2022 14:56:49 +0700
+Subject: [PATCH] Rename references from FlameCord to ArvinCord
+
+
+diff --git a/bootstrap/pom.xml b/bootstrap/pom.xml
+index b0b0d33e..053be67e 100644
+--- a/bootstrap/pom.xml
++++ b/bootstrap/pom.xml
+@@ -37,7 +37,7 @@
+     </dependencies>
+ 
+     <build>
+-        <finalName>FlameCord</finalName>
++        <finalName>ArvinCord</finalName>
+         <plugins>
+             <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+diff --git a/bootstrap/src/main/java/net/md_5/bungee/Bootstrap.java b/bootstrap/src/main/java/net/md_5/bungee/Bootstrap.java
+index 9838f5c5..6c230aee 100644
+--- a/bootstrap/src/main/java/net/md_5/bungee/Bootstrap.java
++++ b/bootstrap/src/main/java/net/md_5/bungee/Bootstrap.java
+@@ -7,7 +7,7 @@ public class Bootstrap
+     {
+         if ( Float.parseFloat( System.getProperty( "java.class.version" ) ) < 52.0 )
+         {
+-            System.err.println( "*** ERROR *** FlameCord requires Java 8 or above to function! Please download and install it!" );
++            System.err.println( "*** ERROR *** ArvinCord requires Java 8 or above to function! Please download and install it!" );
+             System.out.println( "You can check your Java version with the command: java -version" );
+             return;
+         }
+diff --git a/log/src/main/java/net/md_5/bungee/log/LogDispatcher.java b/log/src/main/java/net/md_5/bungee/log/LogDispatcher.java
+index 49dce84b..89f7c7be 100644
+--- a/log/src/main/java/net/md_5/bungee/log/LogDispatcher.java
++++ b/log/src/main/java/net/md_5/bungee/log/LogDispatcher.java
+@@ -12,7 +12,7 @@ public class LogDispatcher extends Thread
+ 
+     public LogDispatcher(BungeeLogger logger)
+     {
+-        super( "FlameCord Logger Thread" );
++        super( "ArvinCord Logger Thread" );
+         this.logger = logger;
+     }
+ 
+diff --git a/proxy/src/main/java/net/md_5/bungee/BungeeCord.java b/proxy/src/main/java/net/md_5/bungee/BungeeCord.java
+index 04229705..633da4b4 100644
+--- a/proxy/src/main/java/net/md_5/bungee/BungeeCord.java
++++ b/proxy/src/main/java/net/md_5/bungee/BungeeCord.java
+@@ -207,7 +207,7 @@ public class BungeeCord extends ProxyServer
+     public BungeeCord() throws IOException
+     {
+         // Java uses ! to indicate a resource inside of a jar/zip/other container. Running Bungee from within a directory that has a ! will cause this to muck up.
+-        Preconditions.checkState( new File( "." ).getAbsolutePath().indexOf( '!' ) == -1, "Cannot use FlameCord in directory with ! in path." );
++        Preconditions.checkState( new File( "." ).getAbsolutePath().indexOf( '!' ) == -1, "Cannot use ArvinCord in directory with ! in path." );
+ 
+         try
+         {
+@@ -567,13 +567,13 @@ public class BungeeCord extends ProxyServer
+     @Override
+     public String getName()
+     {
+-        return "FlameCord";
++        return "ArvinCord";
+     }
+ 
+     @Override
+     public String getVersion()
+     {
+-        return "1.0.3";
++        return "1.0.0-dev";
+     }
+ 
+     public void reloadMessages()
+diff --git a/proxy/src/main/java/net/md_5/bungee/command/CommandBungee.java b/proxy/src/main/java/net/md_5/bungee/command/CommandBungee.java
+index aeda7963..4d77bd20 100644
+--- a/proxy/src/main/java/net/md_5/bungee/command/CommandBungee.java
++++ b/proxy/src/main/java/net/md_5/bungee/command/CommandBungee.java
+@@ -17,6 +17,6 @@ public class CommandBungee extends Command
+     public void execute(CommandSender sender, String[] args)
+     {
+         // FlameCord - Use custom version message
+-        sender.sendMessage( ChatColor.translateAlternateColorCodes( '&', "&eThis server is running &c" + ProxyServer.getInstance().getName() + "&e version &a" + ProxyServer.getInstance().getVersion() + "&e by &bLinsaFTW & Sammwy&e." ) );
++        sender.sendMessage( ChatColor.translateAlternateColorCodes( '&', "&eThis server is running&b Arvin&5Cord&e version &6" + ProxyServer.getInstance().getVersion() + "&e by &bARVIN&a3108 &cI&fD&e." ) );
+     }
+ }
+diff --git a/proxy/src/main/java/net/md_5/bungee/command/CommandReload.java b/proxy/src/main/java/net/md_5/bungee/command/CommandReload.java
+index 5ab4db18..dd8005e5 100644
+--- a/proxy/src/main/java/net/md_5/bungee/command/CommandReload.java
++++ b/proxy/src/main/java/net/md_5/bungee/command/CommandReload.java
+@@ -23,7 +23,7 @@ public class CommandReload extends Command
+         BungeeCord.getInstance().startListeners();
+         BungeeCord.getInstance().getPluginManager().callEvent( new ProxyReloadEvent( sender ) );
+ 
+-        sender.sendMessage( ChatColor.BOLD.toString() + ChatColor.RED.toString() + "FlameCord has been reloaded."
+-                + " This is NOT advisable and you will not be supported with any issues that arise! Please restart FlameCord ASAP." );
++        sender.sendMessage( ChatColor.BOLD.toString() + ChatColor.RED.toString() + "ArvinCord has been reloaded."
++                + " This is NOT advisable and you will not be supported with any issues that arise! Please restart ArvinCord ASAP." );
+     }
+ }
+diff --git a/query/src/main/java/net/md_5/bungee/query/QueryHandler.java b/query/src/main/java/net/md_5/bungee/query/QueryHandler.java
+index b1ecb7ef..f189a9c4 100644
+--- a/query/src/main/java/net/md_5/bungee/query/QueryHandler.java
++++ b/query/src/main/java/net/md_5/bungee/query/QueryHandler.java
+@@ -105,8 +105,8 @@ public class QueryHandler extends SimpleChannelInboundHandler<DatagramPacket>
+             // Waterfall start
+             List<String> players = bungee.getPlayers().stream().map(ProxiedPlayer::getName).collect(Collectors.toList());
+ 
+-            // FlameCord - Rebrand
+-            ProxyQueryEvent event = new ProxyQueryEvent(listener, new QueryResult(listener.getMotd(), "SMP", "FlameCord_Proxy",
++            // ArvinCord - Rebrand
++            ProxyQueryEvent event = new ProxyQueryEvent(listener, new QueryResult(listener.getMotd(), "SMP", "ArvinCord_Proxy",
+                     bungee.getOnlineCount(), listener.getMaxPlayers(), listener.getHost().getPort(),
+                     listener.getHost().getHostString(), "MINECRAFT",  players, bungee.getGameVersion()));
+             QueryResult result = bungee.getPluginManager().callEvent(event).getResult();
+-- 
+2.37.0.windows.1
+

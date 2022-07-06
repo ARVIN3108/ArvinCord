@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>id.arvin3108</groupId>
-    <artifactId>arvincord-super</artifactId>
+    <artifactId>waterfall-super</artifactId>
     <version>dev-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>ArvinCord-Super</name>
+    <name>io.github.waterfallmc</name>
     <description>Super project for ArvinCord.</description>
     <url>https://github.com/ARVIN3108/ArvinCord</url>
 
