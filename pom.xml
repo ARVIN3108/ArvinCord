@@ -9,7 +9,7 @@
 
     <name>Waterfall-Super</name>
     <description>Super project for ArvinCord.</description>
-    <url>https://github.com/2lstudios-mc/FlameCord</url>
+    <url>https://github.com/ARVIN3108/ArvinCord</url>
 
     <modules>
         <module>ArvinCord-Proxy</module>
