@@ -1,0 +1,225 @@
+From 6fc7f2fe77d37ad60dc639c00c406ca2a4204a7f Mon Sep 17 00:00:00 2001
+From: ARVIN3108 <31arvin08@gmail.com>
+Date: Fri, 8 Jul 2022 12:40:47 +0700
+Subject: [PATCH] Custom F3 server brand name
+
+
+diff --git a/arvincord/pom.xml b/arvincord/pom.xml
+index 47a26271..c99b3239 100644
+--- a/arvincord/pom.xml
++++ b/arvincord/pom.xml
+@@ -16,4 +16,13 @@
+ 
+     <name>Waterfall-ArvinCord</name>
+     <description>ArvinCord adds essential features such as commands, whitelist system, etc</description>
++
++    <dependencies>
++        <dependency>
++            <groupId>io.github.waterfallmc</groupId>
++            <artifactId>waterfall-api</artifactId>
++            <version>${project.version}</version>
++            <scope>compile</scope>
++        </dependency>
++    </dependencies>
+ </project>
+diff --git a/arvincord/src/main/java/id/arvin3108/arvincord/ArvinCord.java b/arvincord/src/main/java/id/arvin3108/arvincord/ArvinCord.java
+new file mode 100644
+index 00000000..28ee6c64
+--- /dev/null
++++ b/arvincord/src/main/java/id/arvin3108/arvincord/ArvinCord.java
+@@ -0,0 +1,23 @@
++package id.arvin3108.arvincord;
++
++import id.arvin3108.arvincord.managers.Config;
++import lombok.Getter;
++
++public class ArvinCord {
++    @Getter
++    private static ArvinCord instance;
++    @Getter
++    private Config config;
++
++    public static void init() {
++        instance = new ArvinCord();
++    }
++
++    private void reload() {
++        config = new Config();
++    }
++
++    private ArvinCord() {
++        reload();
++    }
++}
+diff --git a/arvincord/src/main/java/id/arvin3108/arvincord/managers/Config.java b/arvincord/src/main/java/id/arvin3108/arvincord/managers/Config.java
+new file mode 100644
+index 00000000..84849c5d
+--- /dev/null
++++ b/arvincord/src/main/java/id/arvin3108/arvincord/managers/Config.java
+@@ -0,0 +1,29 @@
++package id.arvin3108.arvincord.managers;
++
++import dev._2lstudios.flamecord.configuration.FlameConfig;
++import lombok.Getter;
++import net.md_5.bungee.config.Configuration;
++import net.md_5.bungee.config.ConfigurationProvider;
++import net.md_5.bungee.config.YamlConfiguration;
++
++import java.io.File;
++import java.io.IOException;
++
++public class Config extends FlameConfig {
++    @Getter
++    private String f3name = "&bArvin&5Cord";
++
++    public Config() {
++        try {
++            final File file = new File("./arvincord.yml");
++            final Configuration cfg;
++            final ConfigurationProvider provider = ConfigurationProvider.getProvider(YamlConfiguration.class);
++            if (file.exists()) cfg = provider.load(file);
++            else cfg = new Configuration();
++            this.f3name = setIfUnexistant("f3name", this.f3name, cfg);
++            provider.save(cfg, file);
++        } catch (final IOException e){
++            e.printStackTrace();
++        }
++    }
++}
+diff --git a/flamecord/src/main/java/dev/_2lstudios/flamecord/configuration/FlameConfig.java b/flamecord/src/main/java/dev/_2lstudios/flamecord/configuration/FlameConfig.java
+index 360305b9..3d22d55a 100644
+--- a/flamecord/src/main/java/dev/_2lstudios/flamecord/configuration/FlameConfig.java
++++ b/flamecord/src/main/java/dev/_2lstudios/flamecord/configuration/FlameConfig.java
+@@ -7,19 +7,20 @@ import java.util.HashSet;
+ import net.md_5.bungee.config.Configuration;
+ 
+ public class FlameConfig {
+-    int setIfUnexistant(final String arg1, final int arg2, final Configuration configuration) {
++    // ArvinCord start - Making all methods public
++    public int setIfUnexistant(final String arg1, final int arg2, final Configuration configuration) {
+         return (int) setIfUnexistant(arg1, (Object) arg2, configuration);
+     }
+ 
+-    String setIfUnexistant(final String arg1, final String arg2, final Configuration configuration) {
++    public String setIfUnexistant(final String arg1, final String arg2, final Configuration configuration) {
+         return (String) setIfUnexistant(arg1, (Object) arg2, configuration);
+     }
+ 
+-    boolean setIfUnexistant(final String arg1, final boolean arg2, final Configuration configuration) {
++    public boolean setIfUnexistant(final String arg1, final boolean arg2, final Configuration configuration) {
+         return (boolean) setIfUnexistant(arg1, (Object) arg2, configuration);
+     }
+ 
+-    Object setIfUnexistant(final String arg1, final Object arg2, final Configuration configuration) {
++    public Object setIfUnexistant(final String arg1, final Object arg2, final Configuration configuration) {
+         if (!configuration.contains(arg1)) {
+             configuration.set(arg1, arg2);
+ 
+@@ -29,7 +30,7 @@ public class FlameConfig {
+         }
+     }
+ 
+-    Collection<String> setIfUnexistant(final String arg1, final Collection<String> arg2,
++    public Collection<String> setIfUnexistant(final String arg1, final Collection<String> arg2,
+             final Configuration configuration) {
+         if (!configuration.contains(arg1)) {
+             configuration.set(arg1, new ArrayList<>(arg2));
+@@ -39,4 +40,5 @@ public class FlameConfig {
+             return new HashSet<>(configuration.getStringList(arg1));
+         }
+     }
++    // ArvinCord end - Making all methods public
+ }
+diff --git a/proxy/src/main/java/net/md_5/bungee/BungeeCord.java b/proxy/src/main/java/net/md_5/bungee/BungeeCord.java
+index 633da4b4..5d546806 100644
+--- a/proxy/src/main/java/net/md_5/bungee/BungeeCord.java
++++ b/proxy/src/main/java/net/md_5/bungee/BungeeCord.java
+@@ -14,6 +14,7 @@ import dev._2lstudios.flamecord.FlameCord;
+ import dev._2lstudios.flamecord.commands.FlameCordCommand;
+ import dev._2lstudios.flamecord.configuration.ModulesConfiguration;
+ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
++import id.arvin3108.arvincord.ArvinCord;
+ import io.github.waterfallmc.waterfall.conf.WaterfallConfiguration;
+ import io.github.waterfallmc.waterfall.event.ProxyExceptionEvent;
+ import io.github.waterfallmc.waterfall.exception.ProxyPluginEnableDisableException;
+@@ -28,10 +29,8 @@ import io.netty.util.ResourceLeakDetector;
+ import java.io.File;
+ import java.io.FileReader;
+ import java.io.IOException;
+-import java.io.PrintStream;
+ import java.net.InetSocketAddress;
+ import java.net.SocketAddress;
+-import java.text.MessageFormat;
+ import java.util.ArrayList;
+ import java.util.Collection;
+ import java.util.Collections;
+@@ -299,13 +298,16 @@ public class BungeeCord extends ProxyServer
+         pluginManager.loadPlugins();
+         config.load();
+ 
++        // ArvinCord - Start initialization
++        ArvinCord.init();
++
+         // FlameCord - Renew and register modules
+         final Collection<String> whitelistedAddresses = new HashSet<>();
+ 
+         for (final ServerInfo serverInfo : getServers().values()) {
+             whitelistedAddresses.add(serverInfo.getSocketAddress().toString());
+         }
+-        
++
+         FlameCord.reload(logger, whitelistedAddresses);
+ 
+         if ( config.isForgeSupport() )
+diff --git a/proxy/src/main/java/net/md_5/bungee/connection/DownstreamBridge.java b/proxy/src/main/java/net/md_5/bungee/connection/DownstreamBridge.java
+index 194ada04..c719d30d 100644
+--- a/proxy/src/main/java/net/md_5/bungee/connection/DownstreamBridge.java
++++ b/proxy/src/main/java/net/md_5/bungee/connection/DownstreamBridge.java
+@@ -12,6 +12,7 @@ import com.mojang.brigadier.context.StringRange;
+ import com.mojang.brigadier.suggestion.Suggestion;
+ import com.mojang.brigadier.suggestion.Suggestions;
+ import com.mojang.brigadier.tree.CommandNode;
++import id.arvin3108.arvincord.ArvinCord;
+ import io.netty.buffer.ByteBuf;
+ import io.netty.buffer.ByteBufAllocator;
+ import io.netty.buffer.Unpooled;
+@@ -29,6 +30,7 @@ import net.md_5.bungee.ServerConnection;
+ import net.md_5.bungee.ServerConnection.KeepAliveData;
+ import net.md_5.bungee.UserConnection;
+ import net.md_5.bungee.Util;
++import net.md_5.bungee.api.ChatColor;
+ import net.md_5.bungee.api.ProxyServer;
+ import net.md_5.bungee.api.chat.BaseComponent;
+ import net.md_5.bungee.api.chat.TextComponent;
+@@ -278,6 +280,9 @@ public class DownstreamBridge extends PacketHandler
+     {
+         PluginMessageEvent event = new PluginMessageEvent( server, con, pluginMessage.getTag(), pluginMessage.getData().clone() );
+ 
++        // ArvinCord start - Custom F3 server brand name
++        final String f3name = ChatColor.translateAlternateColorCodes('&',ArvinCord.getInstance().getConfig().getF3name() + "&r");
++
+         if ( bungee.getPluginManager().callEvent( event ).isCancelled() )
+         {
+             throw CancelSendSignal.INSTANCE;
+@@ -294,7 +299,7 @@ public class DownstreamBridge extends PacketHandler
+                     String serverBrand = DefinedPacket.readString(brand);
+                     brand.release();
+                     brand = ByteBufAllocator.DEFAULT.heapBuffer();
+-                    DefinedPacket.writeString(bungee.getName() + " <- " + serverBrand, brand ); // Waterfall
++                    DefinedPacket.writeString(f3name, brand ); // Waterfall // ArvinCord
+                     pluginMessage.setData(brand);
+                     brand.release();
+                 } catch (Exception ProtocolHacksSuck)
+@@ -304,7 +309,8 @@ public class DownstreamBridge extends PacketHandler
+             } else
+             {
+                 String serverBrand = new String( pluginMessage.getData(), StandardCharsets.UTF_8);
+-                pluginMessage.setData( ( bungee.getName() + " <- " + serverBrand ).getBytes(StandardCharsets.UTF_8) ); // FlameCord - 1.7.x support
++                pluginMessage.setData((f3name).getBytes(StandardCharsets.UTF_8) ); // FlameCord - 1.7.x support // ArvinCord
++                // ArvinCord end - Custom F3 server brand name
+             }
+             // FlameCord end - 1.7.x support
+             // changes in the packet are ignored so we need to send it manually
+-- 
+2.37.0.windows.1
+
