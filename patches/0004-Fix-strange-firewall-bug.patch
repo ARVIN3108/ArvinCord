@@ -21,7 +21,7 @@ index c737482e..43d1e0e4 100644
  
              // Flamecord start - Antibot System
 -            if (!(cause instanceof ReadTimeoutException && cause instanceof IOException))
-+            if (cause instanceof DecoderException || cause instanceof IllegalStateException || cause instanceof BadPacketException || cause instanceof QuietException || cause instanceof FastException)
++            if (cause instanceof DecoderException || cause instanceof IllegalStateException || cause instanceof BadPacketException || cause instanceof QuietException || cause instanceof FastException) // ArvinCord - Add patch from @xIsm4
              {
                  FlameCord.getInstance().getAddressDataManager().getAddressData(ctx.channel().remoteAddress()).firewall();
              }

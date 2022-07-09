@@ -50,7 +50,7 @@ index 8d7a612e..441cb75b 100644
          </dependency>
          <!-- FlameCord end -->
 +
-+        <!-- ArvinCord start -->
++        <!-- ArvinCord start - Add our dependencies -->
 +        <dependency>
 +            <groupId>id.arvin3108</groupId>
 +            <artifactId>waterfall-arvincord</artifactId>
