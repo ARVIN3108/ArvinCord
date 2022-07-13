@@ -1,6 +1,6 @@
+# ArvinCord
 <img src="https://cdn.discordapp.com/attachments/921098267029295104/921098438010101790/alvin2.png" height="300" align="right">
 
-# ArvinCord
 ArvinCord is a FlameCord modification to add essential features such as commands, whitelist system, etc.
 
 ArvinCord is compiled like FlameCord does. If you need help, you can always create an [Issue](../../issues) in this repository.
