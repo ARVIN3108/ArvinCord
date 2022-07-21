@@ -3,7 +3,7 @@
 
 ArvinCord is a FlameCord modification to add essential features such as commands, whitelist system, etc.
 
-ArvinCord is compiled like FlameCord does. If you need help, you can always create an [Issue](../../issues) in this repository.
+ArvinCord is compiled like FlameCord does. If you need help, you can always create an [Issue](../../issues) in this repository or if you want to contact via discord, here is my id: `ARVIN3108 ID#5503`.
 
 ## Why fork FlameCord?
 ArvinCord forked out of desire for greater configurability to give to BungeeCord based proxies, which FlameCord is currently unable to offer.
